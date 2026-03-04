@@ -100,6 +100,31 @@ def flatten_to_slices(arr: np.ndarray) -> Tuple[np.ndarray, int]:
     return arr.reshape(s, h, w), s
 
 
+def rgb_like_to_gray(arr: np.ndarray) -> np.ndarray:
+    """
+    Convert common RGB/RGBA TIFF layouts to grayscale.
+    Supported examples:
+      (H, W, 3/4), (S, H, W, 3/4), (3/4, H, W), (S, 3/4, H, W)
+    """
+    x = arr
+
+    # Planar channel-first single image: (C,H,W) -> (H,W,C)
+    if x.ndim == 3 and x.shape[0] in (3, 4) and x.shape[-1] not in (3, 4):
+        x = np.moveaxis(x, 0, -1)
+
+    # Planar channel-first stack: (...,C,H,W) -> (...,H,W,C)
+    if x.ndim >= 4 and x.shape[-3] in (3, 4) and x.shape[-1] not in (3, 4):
+        x = np.moveaxis(x, -3, -1)
+
+    # Interleaved channel-last RGB/RGBA
+    if x.ndim >= 3 and x.shape[-1] in (3, 4):
+        rgb = x[..., :3].astype(np.float32, copy=False)
+        gray = 0.299 * rgb[..., 0] + 0.587 * rgb[..., 1] + 0.114 * rgb[..., 2]
+        return gray
+
+    return x
+
+
 # -------------------------
 # Image Viewer (Zoom/Pan)
 # -------------------------
@@ -1355,6 +1380,7 @@ class MainWindow(QMainWindow):
     def load_tiff(self, path: str):
         try:
             arr = tifffile.imread(path)
+            arr = rgb_like_to_gray(arr)
             flat, slices = flatten_to_slices(arr)
         except Exception as e:
             self.status.setText(f"Failed to load {os.path.basename(path)}: {e}")
