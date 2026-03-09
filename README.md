@@ -1,4 +1,8 @@
-[![Repository Card](https://github-readme-stats.vercel.app/api/pin?username=Luooops&repo=PyTif&show_icons=true&theme=dark)](https://github.com/Luooops/PyTif)
+<p align="center">
+  <img src="https://img.shields.io/github/stars/Luooops/PyTif?style=for-the-badge&logo=github&color=24292e" />
+  <img src="https://img.shields.io/github/forks/Luooops/PyTif?style=for-the-badge&logo=github&color=24292e" />
+  <img src="https://img.shields.io/github/license/Luooops/PyTif?style=for-the-badge&logo=github&color=24292e" />
+</p>
 
 # PyTif
 A visualization app for tiff files with pyQt.
