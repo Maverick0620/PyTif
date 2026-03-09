@@ -4,3 +4,9 @@
 - [x] 支持框选区域的参数计算显示，面积，周长
 - [ ] nd2 support等（待商榷）
 - [ ] 找出多边形区域内最长的线段作为长方形的边（后续）
+- [ ] Set scale, 一个新的工具菜单，允许用户在图片上选一段线段，自动测量线段的pixel距离，同时可以用户填入实际的物理距离，以实现测距功能
+- [ ] global set scale， 勾选可以把这个scale apply到project中的所有图片。不勾选这个scale只apply到当前图片
+- [ ] Measurement manager，像ROI manager一样可以在一个pop-up窗口中中列出所有roi的measurement
+- [ ] measurement： 加入roundness, circlularity,solidity
+- [ ] Colocalization：可以看不同channel的pixel intensity是否在同一个位置overlap，生成一张color scatterplot，xy轴是两个不同的channel，具体google colocalization
+- [ ] Background noise filtering: 可以在设置里设置一个threshold，自动过滤掉pixel intensity低于这个threshold的像素点
