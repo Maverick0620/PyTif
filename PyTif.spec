@@ -1,12 +1,15 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import collect_all
 
+
+datas, binaries, hiddenimports = collect_all('imagecodecs')
 
 a = Analysis(
     ['src/main.py'],
     pathex=[],
-    binaries=[],
-    datas=[],
-    hiddenimports=['imagecodecs'],
+    binaries=binaries,
+    datas=datas,
+    hiddenimports=hiddenimports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
