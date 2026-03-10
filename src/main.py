@@ -93,6 +93,7 @@ class MainWindow(QMainWindow):
         self.btn_file = QToolButton()
         self.btn_file.setText("Open")
         self.btn_file.setPopupMode(QToolButton.MenuButtonPopup)
+        self.btn_file.clicked.connect(self.open_file_dialog)
         self.file_dropdown = QMenu(self.btn_file)
         self.file_dropdown.addAction("Open File", self.open_file_dialog)
         self.file_dropdown.addAction("Open Folder", self.open_folder_dialog)
